@@ -24,7 +24,7 @@ namespace Route.C41.G03.PL
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer("Server = .; Database = MVCProjectG03; Trusted_Connection = True");
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
         }
