@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Route.C41.G03.PL.Models;
-using System;
-using System.Collections.Generic;
+using Route.C41.G03.PL.ViewModels;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Route.C41.G03.PL.Controllers
 {

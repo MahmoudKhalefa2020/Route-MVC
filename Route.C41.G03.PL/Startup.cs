@@ -43,6 +43,7 @@ namespace Route.C41.G03.PL
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
