@@ -10,11 +10,11 @@ namespace Route.C41.G03.DAL.Data.Cofigration
         {
             builder.Property(D => D.Id).UseIdentityColumn(10, 10);
             builder.Property(D => D.Name)
-                   .HasColumnType("navchar")
+                   .HasColumnType("varchar")
                    .HasMaxLength(50)
                    .IsRequired();
             builder.Property(D => D.Code)
-                   .HasColumnType("navchar")
+                   .HasColumnType("varchar")
                    .HasMaxLength(50)
                    .IsRequired();
         }
