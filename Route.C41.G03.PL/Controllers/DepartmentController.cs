@@ -5,15 +5,16 @@ namespace Route.C41.G03.PL.Controllers
 {
     public class DepartmentController : Controller
     {
-        private readonly IDepartmentRepository _departmentRepository;
+        private readonly IDepartmentRepository _departmentRepo;
 
-        public DepartmentController(IDepartmentRepository departmentRepository)
+        public DepartmentController(IDepartmentRepository departmentRepo)
         {
-            _departmentRepository = departmentRepository;
+            _departmentRepo = departmentRepo;
         }
         public IActionResult Index()
         {
-            return View();
+            var departments = _departmentRepo.GetAll();
+            return View(departments);
         }
     }
 }
