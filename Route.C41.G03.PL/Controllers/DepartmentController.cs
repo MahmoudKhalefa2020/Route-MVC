@@ -70,6 +70,8 @@ namespace Route.C41.G03.PL.Controllers
             return Details(id, "Edit");
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        //[Authorize]
         public IActionResult Edit([FromRoute] int id, Department department)
         {
             if (id != department.Id)
