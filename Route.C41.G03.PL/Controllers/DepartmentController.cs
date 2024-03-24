@@ -1,16 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Route.C41.G03.BLL.Interfaces;
 using Route.C41.G03.DAL.Models;
+using System;
 
 namespace Route.C41.G03.PL.Controllers
 {
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository _departmentRepo;
+        private readonly IWebHostEnvironment _env;
 
-        public DepartmentController(IDepartmentRepository departmentRepo)
+        public DepartmentController(IDepartmentRepository departmentRepo, IWebHostEnvironment env)
         {
             _departmentRepo = departmentRepo;
+            _env = env;
         }
         public IActionResult Index()
         {
@@ -39,7 +44,7 @@ namespace Route.C41.G03.PL.Controllers
         }
 
 
-        public IActionResult Details(int? id)
+        public IActionResult Details(int? id, string viewName = "Details")
         {
             if (!id.HasValue)
                 return BadRequest();
@@ -50,7 +55,48 @@ namespace Route.C41.G03.PL.Controllers
 
                 return NotFound();
 
-            return View(department);
+            return View(viewName, department);
         }
+
+        public IActionResult Edit(int? id)
+        {
+            //if (!id.HasValue)
+            //    return BadRequest();
+            //var department = _departmentRepo.Get(id.Value);
+            //if (Department is null)
+            //    return NotFound();
+            //return View(department);
+
+            return Details(id, "Edit");
+        }
+        [HttpPost]
+        public IActionResult Edit([FromRoute] int id, Department department)
+        {
+            if (id != department.Id)
+                return BadRequest();
+            if (!ModelState.IsValid)
+                return View(department);
+
+            try
+            {
+                _departmentRepo.Update(department);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                if (_env.IsDevelopment())
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+
+                }
+                else
+                    ModelState.AddModelError(string.Empty, "An Error Has Occurred during Updating Department");
+
+                return View(department);
+            }
+
+
+        }
+
     }
 }
