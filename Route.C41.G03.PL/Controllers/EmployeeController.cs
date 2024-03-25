@@ -7,81 +7,71 @@ using System;
 
 namespace Route.C41.G03.PL.Controllers
 {
-    public class DepartmentController : Controller
+    public class EmployeeController : Controller
     {
-        private readonly IDepartmentRepository _departmentRepo;
+        private readonly IEmployeeRepository _employeeRepo;
         private readonly IWebHostEnvironment _env;
 
-        public DepartmentController(IDepartmentRepository departmentRepo, IWebHostEnvironment env)
+        public EmployeeController(IEmployeeRepository employeeRepo, IWebHostEnvironment env)
         {
-            _departmentRepo = departmentRepo;
+            _employeeRepo = employeeRepo;
             _env = env;
         }
         public IActionResult Index()
         {
-            var departments = _departmentRepo.GetAll();
-            return View(departments);
+            var Employess = _employeeRepo.GetAll();
+            return View(Employess);
         }
-        [HttpGet]
+
         public IActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
-        public IActionResult Create(Department department)
+        public IActionResult Create(Employee employee)
         {
             if (ModelState.IsValid)
             {
-                var count = _departmentRepo.Add(department);
+                var count = _employeeRepo.Add(employee);
                 if (count > 0)
                 {
                     return RedirectToAction(nameof(Index));
                 }
+
             }
-
-            return View(department);
+            return View(employee);
         }
-
 
         public IActionResult Details(int? id, string viewName = "Details")
         {
             if (!id.HasValue)
+            {
                 return BadRequest();
-
-            var department = _departmentRepo.Get(id.Value);
-
-            if (department is null)
-
+            }
+            var Employee = _employeeRepo.Get(id.Value);
+            if (Employee is null)
                 return NotFound();
 
-            return View(viewName, department);
+
+            return View(viewName, Employee);
         }
 
         public IActionResult Edit(int? id)
         {
-            //if (!id.HasValue)
-            //    return BadRequest();
-            //var department = _departmentRepo.Get(id.Value);
-            //if (Department is null)
-            //    return NotFound();
-            //return View(department);
-
             return Details(id, "Edit");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize]
-        public IActionResult Edit([FromRoute] int id, Department department)
+        public IActionResult Edit([FromRoute] int id, Employee employee)
         {
-            if (id != department.Id)
+            if (id != employee.Id)
                 return BadRequest();
-            if (!ModelState.IsValid)
-                return View(department);
 
+            if (!ModelState.IsValid)
+                return View(employee);
             try
             {
-                _departmentRepo.Update(department);
+                _employeeRepo.Update(employee);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
@@ -92,25 +82,22 @@ namespace Route.C41.G03.PL.Controllers
 
                 }
                 else
-                    ModelState.AddModelError(string.Empty, "An Error Has Occurred during Updating Department");
+                    ModelState.AddModelError(string.Empty, "An Error Has Occurred during Updating Employee");
 
-                return View(department);
+                return View(employee);
             }
-
-
         }
-
 
         public IActionResult Delete(int? id)
         {
             return Details(id, "Delete");
         }
         [HttpPost]
-        public IActionResult Delete(Department department)
+        public IActionResult Delete(int id, Employee employee)
         {
             try
             {
-                _departmentRepo.Delete(department);
+                _employeeRepo.Delete(employee);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -122,9 +109,9 @@ namespace Route.C41.G03.PL.Controllers
 
                 }
                 else
-                    ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting Department");
+                    ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting Employee");
 
-                return View(department);
+                return View(employee);
             }
         }
     }
