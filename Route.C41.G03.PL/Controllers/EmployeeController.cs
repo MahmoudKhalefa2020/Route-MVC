@@ -10,9 +10,9 @@ namespace Route.C41.G03.PL.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepo;
-        private readonly IWebHostEnvironment _env;
+        private readonly IHostEnvironment _env;
 
-        public EmployeeController(IEmployeeRepository employeeRepo, IWebHostEnvironment env)
+        public EmployeeController(IEmployeeRepository employeeRepo, IHostEnvironment env)
         {
             _employeeRepo = employeeRepo;
             _env = env;
@@ -27,6 +27,7 @@ namespace Route.C41.G03.PL.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult Create(Employee employee)
         {

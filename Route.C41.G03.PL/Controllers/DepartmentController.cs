@@ -10,9 +10,9 @@ namespace Route.C41.G03.PL.Controllers
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository _departmentRepo;
-        private readonly IWebHostEnvironment _env;
+        private readonly IHostEnvironment _env;
 
-        public DepartmentController(IDepartmentRepository departmentRepo, IWebHostEnvironment env)
+        public DepartmentController(IDepartmentRepository departmentRepo, IHostEnvironment env)
         {
             _departmentRepo = departmentRepo;
             _env = env;
