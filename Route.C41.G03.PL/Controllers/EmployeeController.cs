@@ -19,6 +19,7 @@ namespace Route.C41.G03.PL.Controllers
         }
         public IActionResult Index()
         {
+            TempData.Keep();
             var Employess = _employeeRepo.GetAll();
             return View(Employess);
         }
@@ -31,13 +32,17 @@ namespace Route.C41.G03.PL.Controllers
         [HttpPost]
         public IActionResult Create(Employee employee)
         {
+
             if (ModelState.IsValid)
             {
                 var count = _employeeRepo.Add(employee);
                 if (count > 0)
-                {
-                    return RedirectToAction(nameof(Index));
-                }
+
+                    TempData["Message"] = "Employee created";
+
+                else
+                    TempData["Message"] = "An Error Occured :(";
+                return RedirectToAction(nameof(Index));
 
             }
             return View(employee);
