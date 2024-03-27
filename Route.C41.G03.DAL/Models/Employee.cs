@@ -48,8 +48,8 @@ namespace Route.C41.G03.DAL.Models
         public Gender Gender { get; set; }
         public EmpType EmployeeType { get; set; }
         public bool IsDeleted { get; set; } = false;
-
-
+        public int? DepartmentId { get; set; }
+        public Department Department { get; set; }
 
 
     }

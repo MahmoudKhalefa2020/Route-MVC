@@ -17,6 +17,11 @@ namespace Route.C41.G03.DAL.Data.Cofigration
                    .HasColumnType("varchar")
                    .HasMaxLength(50)
                    .IsRequired();
+
+            builder.HasMany(D => D.Employees)
+                    .WithOne(E => E.Department)
+                    .HasForeignKey(E => E.DepartmentId)
+                    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -77,7 +77,14 @@ namespace Route.C41.G03.PL.Controllers
                 return View(employee);
             try
             {
-                _employeeRepo.Update(employee);
+                var count = _employeeRepo.Update(employee);
+                if (count > 0)
+
+                    TempData["Message"] = "Employee Edited";
+
+                else
+                    TempData["Message"] = "An Error Occured :(";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
