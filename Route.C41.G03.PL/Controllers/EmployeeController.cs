@@ -94,7 +94,7 @@ namespace Route.C41.G03.PL.Controllers
             return Details(id, "Delete");
         }
         [HttpPost]
-        public IActionResult Delete(int id, Employee employee)
+        public IActionResult Delete(Employee employee)
         {
             try
             {
