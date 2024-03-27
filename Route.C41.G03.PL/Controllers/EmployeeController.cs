@@ -10,11 +10,13 @@ namespace Route.C41.G03.PL.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepo;
+        //private readonly IDepartmentRepository _departmentRepo;
         private readonly IHostEnvironment _env;
 
         public EmployeeController(IEmployeeRepository employeeRepo, IHostEnvironment env)
         {
             _employeeRepo = employeeRepo;
+            //_departmentRepo = departmentRepo;
             _env = env;
         }
         public IActionResult Index()
@@ -26,6 +28,7 @@ namespace Route.C41.G03.PL.Controllers
 
         public IActionResult Create()
         {
+            //ViewBag.Departments = _departmentRepo.GetAll();
             return View();
         }
 

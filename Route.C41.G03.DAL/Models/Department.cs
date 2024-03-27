@@ -16,6 +16,6 @@ namespace Route.C41.G03.DAL.Models
 
         [Display(Name = "Date Of Creation")]
         public DateTime DateOfCreation { get; set; }
-        public ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
+        public virtual ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
     }
 }
