@@ -4,9 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Route.C41.G03.BLL.Interfaces;
-using Route.C41.G03.BLL.Repositories;
 using Route.C41.G03.DAL.Data;
+using Route.C41.G03.PL.Extensions;
 
 namespace Route.C41.G03.PL
 {
@@ -30,8 +29,7 @@ namespace Route.C41.G03.PL
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddApplicationServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
