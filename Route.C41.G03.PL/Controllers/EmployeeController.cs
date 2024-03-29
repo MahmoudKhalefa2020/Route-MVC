@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Route.C41.G03.BLL.Interfaces;
 using Route.C41.G03.DAL.Models;
 using System;
+using System.Linq;
 
 namespace Route.C41.G03.PL.Controllers
 {
@@ -19,10 +20,19 @@ namespace Route.C41.G03.PL.Controllers
             //_departmentRepo = departmentRepo;
             _env = env;
         }
-        public IActionResult Index()
+        public IActionResult Index(string searchInp)
         {
             TempData.Keep();
-            var Employess = _employeeRepo.GetAll();
+            var Employess = Enumerable.Empty<Employee>();
+            if (string.IsNullOrEmpty(searchInp))
+            {
+                Employess = _employeeRepo.GetAll();
+
+            }
+            else
+            {
+                Employess = _employeeRepo.GetEmployeesByName(searchInp);
+            }
             return View(Employess);
         }
 
