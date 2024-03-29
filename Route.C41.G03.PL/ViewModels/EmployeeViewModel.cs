@@ -32,6 +32,8 @@ namespace Route.C41.G03.PL.ViewModels
         public DateTime HiringDate { get; set; }
         public Gender Gender { get; set; }
         public EmpType EmployeeType { get; set; }
+        public int? DepartmentId { get; set; }
+        public virtual Department Department { get; set; }
 
     }
 }

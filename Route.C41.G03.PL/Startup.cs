@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Route.C41.G03.DAL.Data;
 using Route.C41.G03.PL.Extensions;
+using Route.C41.G03.PL.Helpers;
 
 namespace Route.C41.G03.PL
 {
@@ -30,6 +31,8 @@ namespace Route.C41.G03.PL
             });
 
             services.AddApplicationServices();
+
+            services.AddAutoMapper(M => M.AddProfile(new MappingProfiles()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Route.C41.G03.DAL.Models;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Route.C41.G03.PL.ViewModels
@@ -14,5 +16,6 @@ namespace Route.C41.G03.PL.ViewModels
 
         [Display(Name = "Date Of Creation")]
         public DateTime DateOfCreation { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
     }
 }
