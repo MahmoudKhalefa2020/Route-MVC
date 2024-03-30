@@ -9,7 +9,12 @@ namespace Route.C41.G03.PL.Helpers
         public MappingProfiles()
         {
             CreateMap<EmployeeViewModel, Employee>().ReverseMap();
+
             CreateMap<DepartmentViewModel, Department>().ReverseMap();
+            //CreateMap<DepartmentViewModel, Department>()
+            //.ForMember(dest => dest.Employees, opt => opt.MapFrom(src => src.Employees))
+            //.ReverseMap()
+            //.ForMember(dest => dest.Employees, opt => opt.MapFrom(src => src.Employees));
         }
     }
 }
