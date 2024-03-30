@@ -26,7 +26,7 @@ namespace Route.C41.G03.PL.Controllers
         }
         public IActionResult Index()
         {
-            var departments = _unitOfWork.DepartmentRepository.GetAll();
+            var departments = _unitOfWork.Repository<Department>().GetAll();
             var deptsmapped = _mapper.Map<IEnumerable<Department>, IEnumerable<DepartmentViewModel>>(departments);
             return View(deptsmapped);
         }
@@ -42,7 +42,7 @@ namespace Route.C41.G03.PL.Controllers
             if (ModelState.IsValid)
             {
                 var deptmapped = _mapper.Map<DepartmentViewModel, Department>(departmentVM);
-                _unitOfWork.DepartmentRepository.Add(deptmapped);
+                _unitOfWork.Repository<Department>().Add(deptmapped);
                 var count = _unitOfWork.Complete();
                 if (count > 0)
                 {
@@ -59,7 +59,7 @@ namespace Route.C41.G03.PL.Controllers
             if (!id.HasValue)
                 return BadRequest();
 
-            var department = _unitOfWork.DepartmentRepository.Get(id.Value);
+            var department = _unitOfWork.Repository<Department>().Get(id.Value);
 
             var deptmapped = _mapper.Map<Department, DepartmentViewModel>(department);
 
@@ -96,7 +96,7 @@ namespace Route.C41.G03.PL.Controllers
             {
                 var deptmapped = _mapper.Map<DepartmentViewModel, Department>(departmentVM);
 
-                _unitOfWork.DepartmentRepository.Update(deptmapped);
+                _unitOfWork.Repository<Department>().Update(deptmapped);
                 _unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }
@@ -128,7 +128,7 @@ namespace Route.C41.G03.PL.Controllers
             {
                 var deptmapped = _mapper.Map<DepartmentViewModel, Department>(departmentVM);
 
-                _unitOfWork.DepartmentRepository.Delete(deptmapped);
+                _unitOfWork.Repository<Department>().Delete(deptmapped);
                 _unitOfWork.Complete();
                 return RedirectToAction(nameof(Index));
             }

@@ -1,22 +1,43 @@
 ﻿using Route.C41.G03.BLL.Interfaces;
 using Route.C41.G03.DAL.Data;
+using Route.C41.G03.DAL.Models;
+using System.Collections;
 
 namespace Route.C41.G03.BLL.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _dbContext;
+        private Hashtable _repositeries;
 
-        public IDepartmentRepository DepartmentRepository { get; set; }
-        public IEmployeeRepository EmployeeRepository { get; set; }
+
 
         public UnitOfWork(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
-            DepartmentRepository = new DepartmentRepository(dbContext);
-            EmployeeRepository = new EmployeeRepository(dbContext);
-        }
 
+        }
+        public IGenericRepository<T> Repository<T>() where T : ModelBase
+        {
+            var key = typeof(T).Name;
+            if (!_repositeries.ContainsKey(key))
+            {
+                if (key == nameof(Employee))
+                {
+                    var repository = new EmployeeRepository(_dbContext);
+                    _repositeries.Add(key, repository);
+                }
+
+                else
+                {
+                    var repository = new GenericRepository<T>(_dbContext);
+                    _repositeries.Add(key, repository);
+                }
+            }
+
+            return _repositeries[key] as IGenericRepository<T>;
+
+        }
 
         public void Dispose()
         {
@@ -27,5 +48,7 @@ namespace Route.C41.G03.BLL.Repositories
         {
             return _dbContext.SaveChanges();
         }
+
+
     }
 }
