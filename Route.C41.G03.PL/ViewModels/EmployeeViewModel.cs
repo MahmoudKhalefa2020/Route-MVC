@@ -1,4 +1,5 @@
-﻿using Route.C41.G03.DAL.Models;
+﻿using Microsoft.AspNetCore.Http;
+using Route.C41.G03.DAL.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -33,6 +34,9 @@ namespace Route.C41.G03.PL.ViewModels
         public Gender Gender { get; set; }
         public EmpType EmployeeType { get; set; }
         public int? DepartmentId { get; set; }
+
+        public string ImageName { get; set; }
+        public IFormFile Image { get; set; }
         public virtual Department Department { get; set; }
 
     }

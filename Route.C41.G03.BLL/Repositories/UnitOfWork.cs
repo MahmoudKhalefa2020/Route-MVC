@@ -15,6 +15,7 @@ namespace Route.C41.G03.BLL.Repositories
         public UnitOfWork(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+            _repositeries = new Hashtable();
 
         }
         public IGenericRepository<T> Repository<T>() where T : ModelBase
