@@ -38,7 +38,7 @@
     <table class="mt-4 table table-striped table-hover">
         <thead>
             <tr>
-                
+                <th>Image</th>
                 <th>@Html.DisplayNameFor(E => E.Name)</th>
                 <th>@Html.DisplayNameFor(E => E.Age)</th>
                 <th>@Html.DisplayNameFor(E => E.Department.Name)</th>
@@ -57,7 +57,11 @@
             {
                 <tr>
 
-                   
+                   <td>
+                        
+                            <img src="~/files/images/@employee.ImageName" class="img-fluid rounded-circle" alt="Emmployee Image" />
+                        
+                   </td>
                     <td>@employee.Name</td>
                     <td>@employee.Age</td>
                     <td>@employee.Department?.Name</td>
